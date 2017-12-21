@@ -1,0 +1,4 @@
+const char WIFI_SID[] = "接続するWifiのSSID";
+const char WIFI_PASSWORD[] = "接続するWifiのパスワード";
+
+const char END_POINT[] = "サーバーのURL";
