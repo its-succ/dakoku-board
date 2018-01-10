@@ -10,6 +10,7 @@
 
 #define COMMAND_TIMEOUT 400
 #define POLLING_INTERVAL 500
+static const int PiezoPin = 16, buttonPin = 14;
 
 RCS620S rcs620s;
 
@@ -36,6 +37,8 @@ void setup() {
   while (!ret) {}             // blocking
   Serial.println("INIT"); 
 
+  pinMode(buttonPin, INPUT_PULLUP);
+
   // set up the LCD's number of columns and rows: 
   lcd.begin(8, 2);
   lcd.print("PLEASE");
@@ -46,11 +49,17 @@ void setup() {
 void loop() {
   int ret, i;
 
+  int buttonState = digitalRead(buttonPin);
+  if (buttonState == LOW) {
+    Serial.println("Button pushed");
+  } 
+
   // Polling
   rcs620s.timeout = COMMAND_TIMEOUT;
   ret = rcs620s.polling();
 
   if(ret) {
+    tone(PiezoPin, 494, 300);
     char buf[9];
     sprintf(buf, "%02x%02x%02x%02x%02x%02x%02x%02x", rcs620s.idm[0], rcs620s.idm[1], rcs620s.idm[2], rcs620s.idm[3], rcs620s.idm[4], rcs620s.idm[5], rcs620s.idm[6], rcs620s.idm[7]);
     Serial.println("IDM:" + String(buf));

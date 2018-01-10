@@ -30,7 +30,7 @@
 /* --------------------------------
  * Macro
  * -------------------------------- */
-static const int RXPin = 12, TXPin = 14;
+static const int RXPin = 12, TXPin = 2;
 SoftwareSerial ss(RXPin, TXPin, false, 256);
 
 /* --------------------------------
