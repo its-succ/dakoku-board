@@ -3,3 +3,7 @@
 # Example .gitignore files: https://github.com/github/gitignore
 
 config.h
+ciotc_config.h
+*.pem
+
+
